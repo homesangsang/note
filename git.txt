@@ -1,0 +1,70 @@
+git 学习笔记
+
+sudo apt-get install git 	//安装git
+//下面两行表示这台机器上的所有git仓库都会使用这个配置，当然也可以对某个仓库制定不同的用户名和email
+git config --global user.name "your name"
+git config --global user.email "email@example.com"
+
+创建git仓库
+mkdir storehouseName
+cd storehouse
+git init
+要真正使用版本控制系统，就必须以纯文本当时编写文件（所以word是没办法跟踪的）
+
+
+git add filename	//把文件添加到仓库
+git commit -m "wrote a filename file"		-m后面输入的是本次提交的说明，可以输入任意内容，当然是有意义的，这样你就能从历史记录里方便的找到改动的记录，同样这条命令会提示你一个文件被改动，插入了两行内容
+为什么需要添加add，commit两步，因为commit可以一次提交很多的文件，多以可以多次add不同的文件，比如
+git add file1.txt
+git add file2.txt file3.txt
+git commit -m "add 3 files"
+
+
+git status	//查看被修改但是还没准备提交的修改的内容
+git diff	//difference ,可以查看修改的内容
+git add 	//将修改后的内容添加到仓库
+git status	//可以查看将要被提交的修改后的内容，之后就可以提交了
+git commit	//同上面的git commit -m ""
+git status	//查看当前仓库状态
+
+
+
+版本回退
+git log		//查看提交历史，确定回退到哪个版本
+git reset --hard commit_id 
+		//回退到某个版本
+git reflog	//查看命令历史，以便确定要回到未来哪个版本（可以查看到所有修改的版本号）
+另：HEAD是指向版本的指针，可以分别指向不同的历史版本，所以git的回退是非常快的，只需要将HEAD指针指向不同的版本即可。HEAD表示当前版本，HEAD^表示上一个版本，HEAD…^^表示上上个版本，HEAD~100表示回退到之前的100个版本。另外，也可以直接用commit_id号
+
+
+
+暂存区的概念
+工作区：当前仓库目录
+版本库：.git隐藏文件
+	暂存区：stage
+	分支：master，以及指向master的指针HEAD
+工作区有一个隐藏目录.git,是git的版本库，版本库中最重要的及时暂存区stage，同时git还同时创建第一个分支master以及指向master得到指针HEAD
+
+git add <filename> 将文件提交到暂存区
+git commit	   将文件提交到分支master
+git status 	   查看暂存区的内容
+
+
+
+管理修改
+
+
+
+撤销修改
+//在工作区
+git checkout -- file	//让文件回到最近一次git commit或git add时的状态
+上一条命令中--是很重要的，没有--就变成了“切换到另一个分支”的命令
+//在暂存区
+git reset HEAD file然后git checkout --file
+
+
+删除文件
+git rm <filename>
+git commit -m ""
+
+git checkout -- file
