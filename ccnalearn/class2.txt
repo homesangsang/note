@@ -24,4 +24,21 @@ IP地址：32位
 网关：代理ARP请求，同时是同一网段的门，想请求不同的网段必须经过网关，解决电脑的二层封装
 逐跳转发，逐跳更改二层封装
 
-							--
+实验
+PC1-----R1-----PC2
+
+
+路由器，是否进入配置向导，选择no
+	Router>用户模式
+	Router>enable		进入#模式
+	Router#			特权模式
+		show running-config	查看正在运行的配置
+
+		conf		进去全局模式
+	Router(config)#		全局模式
+		int f0/x
+	Router(config-if)#	
+		ip address 192.168.1.1 255.255.255.0
+		#no sh
+		#exit
+
