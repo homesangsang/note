@@ -1,0 +1,30 @@
+分支管理
+
+1.创建与合并分支
+（1）创建dev分支，然后切换到devf分支：
+	$git checkout -b dev 
+	gitcheckout命令加上-b参数表示创建并切换，相当于一下两条命令
+		$git branch dev
+		$git checkout dev
+	然后用git branch查看当前分支，命令会列出所有分支，当前分支会加上×号
+（2）修改完文件之后就可以用git checkout master切换会master分支
+	$git checkout master
+（3）将master分支的工作合并到master分支上：
+	$git merge dev		//合并制定分支到当前分支上，
+（4）删除分支
+	$git branch -d dev
+
+
+另注：因为创建，合并和删除分支非常快，所以git鼓励你使用废纸完成某个任务，合并后在删掉分支和直接在master分支上工作效果是一样的，但是更安全
+
+使用到的命令
+git branch
+git branch <branchname>
+git checkout <branchname>
+git checkout -b <branchname>
+git merge <branchname>
+git branch -d <branchname>
+
+
+2.解决冲突
+

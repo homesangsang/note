@@ -1,0 +1,32 @@
+一.建立远程仓库
+1.在github上申请账号
+2.创建SSH Key	
+	在用户主目录下，进入.ssh目录，看有没有id_rsa和id_rsa.pub两个文件，如果有，可以直接跳过，如果没有，运行$ssh-keygen -t rsa -C "youremail@example.com"，然后一路回车即可。
+3.登陆github，在Account settings中打开SSH Keys,单击Add SSH Keys,添加任意title，然后在Key中复制id_rsa.pub文件的内容，然后点Add Key即可看到自己的Key
+重要命令：
+ssh-keygen -t rsa -C "youremail@example.com"	//添加SSH Key
+
+
+二.添加远程库
+前提情景：现在有本地的git仓库，想在github上建立一个git仓库，并让则会两个仓库同步远程
+1.登陆github，在右上角找到creat a new repo
+	Repository name 填入本地仓库的名字，然后点击create repository 
+2.把本地的仓库关联到github
+	$git remote add origin git@github.com:username/repositoryname.git
+3.把本地的仓库推送到github
+	$git push -u origin master	//第一次推送使用-u参数是为了把本地的master分支的内容推送到远程新的master上，同时把本地的master分支嗯哼远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令
+4.以后推送
+	$git push origin master
+
+
+
+三.从远程库克隆
+1.在github上创建仓库时勾选Initialize this repository with a README
+2.本地$git clone git@github.com.username/repositoryname.git
+3.如果是多人协作开发，那么每个人各自从远程克隆一根就可以
+
+
+另外，git支持多种协议额，包括https，但是通过ssh支持的原生git协议速度最快
+
+
+
