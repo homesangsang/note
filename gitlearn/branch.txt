@@ -47,3 +47,20 @@ git branch -d feature1		//删除feature分支
 
 总结：当git无法完成自动合并分支时，就必须首先解决冲突。解决冲突后，在提交，合并完成
 git log --graph --pretty=online --abbrev-commit 可以看到分支图
+
+
+
+
+
+bug分支
+情景：当前有一个未完成的项目代码，但是有bug需要修复
+解决：将现有代码用git stash存放起来，同时创建一个新的分支issue-no.，在该分支上修改bug，之后合并项目
+
+git stash		//在项目的分支上用此命令可以将项目压进仓库，同时在工作区的列表里将不存在该项目
+
+git stash pop		//在项目的分支上用该命令可以将项目待会工作区
+git stash list 		//可以列出暂时存放在仓库的项目列表
+
+另外
+git merge --no--ff -m "修改bug的备注" branchname
+
