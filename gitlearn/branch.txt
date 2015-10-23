@@ -64,3 +64,32 @@ git stash list 		//可以列出暂时存放在仓库的项目列表
 另外
 git merge --no--ff -m "修改bug的备注" branchname
 
+
+
+
+
+
+Feature 分支
+背景：软件开发添加新功能时为了不因为局部代码而打乱了整体代码，通常每添加一个新功能的时候最好新建一个feature分支，在上面开发，完成后合并，最终产出该feature分支
+
+git checkout -b feature-functionname		//创建feature分支，后面的是需求功能的名称或者feature代号
+git add filename		//功能代码源文件
+git status			//查看当前分支和版本库的状态
+git commit -m "description function" //提交描述
+git checkout dev		//切换为dev分支
+git merge feature-functionname  //合并
+若没有合并，而且需求是将上述功能删除，这时需要
+git branch -D feature-functionname		//强制删除功能分支
+
+接下来的步骤就是将dev分支合并到master分支，然后删除dev分支
+注意上面删除分支有别于删除提交之后的分支，提交时候删除是
+git branch -d feature-name
+而上面是-D参数
+
+
+
+
+
+
+多人协作
+背景：
