@@ -27,4 +27,23 @@ git branch -d <branchname>
 
 
 2.解决冲突
+当分支和master位于同一位置的修改冲突的时候，通常不能由系统修改提交，所以只能通过修改一个master分支，然后删除另外一个分支，具体模拟过程如下
+git checkout -b feature1	//创建一个分支feature1
+//修改一个文件
+git add filename.txt		//提交在feature1下的修改
+git commit -m "under feature1"
+git checkout master		//切换到master分支
+//修改同一个文件
+git add filename.txt		//提交在master下的修改
+git commit -m "under master"
+git merge feature 		//将feature1合并到master
+//这时候会提示报错，CONFLICT(content)Merge conflict in filename.txt\nAutomatic merge failed;fix conflicts and then commit the result.此时必须手动修改解决冲突然后提交
+//修改内容
+git add filename.txt
+git commit -m "conflict fixed"
+git log --grep --pretty=online --abbrev-commit	//查看修改的简略形式
+git branch -d feature1		//删除feature分支
 
+
+总结：当git无法完成自动合并分支时，就必须首先解决冲突。解决冲突后，在提交，合并完成
+git log --graph --pretty=online --abbrev-commit 可以看到分支图
