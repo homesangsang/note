@@ -92,4 +92,40 @@ git branch -d feature-name
 
 
 多人协作
-背景：
+背景：多人开发时，从软件仓库克隆出来的本地仓库只有master分支，用于开发的dev分支是不会被克隆出来。当你提交了dev分支时，若有其他人同时提交了dev分支，那么对方就需要将dev分支pull出来，同时合并，若无法合并就需要手动修改。具体描述代码如下
+当你从远程仓库克隆时，实际上git自动把本地的master分支和远程的master对应了起来，并且远程仓库的默认名称是origin
+查看远程仓库的信息：git remote
+查看详细信息：	    git remote -v
+推送分支：	    git push origin master
+推送其他分支：	    git push origin branchname
+各种分支推送标准
+	1.master	主分支		时刻同步
+	2.dev		开发分支	也需要同步
+	3.bug		本地修复bug	不必同步
+	4.feature	添加功能	取决于小伙伴是否在上面开发
+
+分支抓取
+多人协作时，大家都会网master和dev上推送各自的修改
+第一个小伙伴：
+git clone git@github.com:homesangsang/learngit.git
+//默认情况下小伙伴只能看到本地master	git branch master
+//小伙伴要在dev上开发，就必须创建远程origin的dev到本地，
+git checkout -b dev origin/dev		//注意和本地创建分支的不同
+git commit -m "description"
+第二个小伙伴
+git add filename
+git commit -m "description"
+git push origin dev	//此时提示failed to push some tefs to ....
+//解决办法：git pull 把最新的提交从origin/dev 抓取，然后合并到本地，解决冲突，在推送
+git pull	//提示失败，必须创建dev和origin/dev的链接
+git branch --set-upstream dev origin/dev
+git pull
+//在手动修改冲突然后提交
+
+通过上述描述，可以总结出多人协作开发的工作过程
+	1.首先，可以试图git push origin branch-name
+	2.如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并
+	3.如果合并有冲突，则先解决冲突，并在本地提交，
+	4.吐过没有冲或者解决掉冲突，在用git push origin branch-name
+	5.如果git pull提示no tracking information 则说明本地分支和远程分支的链接关系没有创建，用命令 git branch --set-upstream branch-name origin/branch-name
+
