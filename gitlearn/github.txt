@@ -1,4 +1,4 @@
-一.建立远程仓库
+﻿一.建立远程仓库
 1.在github上申请账号
 2.创建SSH Key	
 	在用户主目录下，进入.ssh目录，看有没有id_rsa和id_rsa.pub两个文件，如果有，可以直接跳过，如果没有，运行$ssh-keygen -t rsa -C "youremail@example.com"，然后一路回车即可。
@@ -22,7 +22,7 @@ ssh-keygen -t rsa -C "youremail@example.com"	//添加SSH Key
 
 三.从远程库克隆
 1.在github上创建仓库时勾选Initialize this repository with a README
-2.本地$git clone git@github.com.username/repositoryname.git
+2.本地$git clone git@github.com:username/repositoryname.git
 3.如果是多人协作开发，那么每个人各自从远程克隆一根就可以
 
 
