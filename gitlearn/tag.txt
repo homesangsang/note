@@ -1,0 +1,36 @@
+标签管理
+发布某个版本时，通常在版本库中打一个标签，这样就唯一确定了打标签时刻的版本，将来无论什么时候，取某个标签的版本，就是把那个打标签的时刻的历史版本uchulai，所以标签也是版本库的一个快照
+实际上，标签是指向某个commit的指针常量，不可改变，所以创建和删除标签都是瞬间完成的
+
+
+
+
+
+创建标签
+在工作的分支上创建标签
+git branch
+git checkout master
+git tag tagname		例如 git master v1.0
+git tag 		//查看所有标签
+默认标签是打在最新的commit上的，如果忘记大标签，可以找到历史提交打commit id ，然后打上标签
+git log --pretty=online --abbrev-commit
+git tag v8.9 commitidnumber
+
+注意，标签不是按照时间顺序列出，而是按照字母排序，可以用git show <tagname>查看标签信息
+还可以用-s属性私钥签名一个标签，例如
+git tag -s v0.2 -m "signed version 0.2 released" commitidnumber
+
+PGP签名0.0
+
+
+
+操作标签
+删除：git tag -d v0.1
+推送：git push origin v1.0
+      git push origin --tags	//一次推送全部
+删除远程标签：
+	git tag -d v0.9		//先从本地删除
+	git push origin :refs/tags/v0.9 //删除远程标签
+
+
+ 
