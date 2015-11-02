@@ -1,0 +1,131 @@
+单臂路由
+配置命令：
+交换机：
+	en
+	conf
+	int f0/1
+	switchport mode trunk //设置trunk模式，走大型流量	
+	switchport mode access	//配置接入模式
+	switchport access vlan 10
+show vlan brief	//查看vlan的信息，交换机默认的vlan1，默认激活
+		
+
+单臂路由：
+	int 主接口
+	no sh
+	encaosykatuib dot1Q vlannumber(例如10)
+	ip add 
+	no sh
+
+	exit
+	encao dot1Q vlannumber(例如20)
+	ip add
+	no sh
+	
+
+三层交换机：
+	SVI：switch virtual interface
+	
+	config t
+	switchport trunk encapsulation dot1q
+	switchport mode trunk 
+	exit
+	vlan
+	vlan 10
+	vlan 20
+	inter vlan 10
+	ip add 
+	no sh
+
+	inter vlan 20
+	ip add 
+	no sh
+
+	show ip route
+	
+	ip routing 		//开辟路由功能
+	no ip routing 		//关闭路由功能
+	
+
+VTP:vlan trunk protocol
+同步管理vlan的信息
+在思科上叫VIP，华为GVRP,
+
+添加为了避免重复配置vlan，从一个控制点，维护真个网络上的vlan的添加，删除，和重命名的工作
+配置VTP需要配置密码，为了安全
+
+三种模式：
+1.server	服务器模式
+2.client	客户机模式
+3.transparent	透明模式
+
+server 模式：提供vlan id和名字信息
+		学习相同域名的VTP信息
+		转发相同域名的VIP消息
+		可以添加，删除，更改vlan
+
+client 模式：不允许自由添加，删除和更改vlan消息
+	提供和学习是基于修正版本号的
+transparent 模式：
+		不提供VTP消息
+		不学习VTP消息
+		可以添加，删除，和更改vlan，只在本地有效
+
+vtp domain server/client/transparent
+vtp password .......
+
+
+show vtp status	//查看交换机的vtp状态
+
+
+VTP修剪：减少终极链路上不必要的广播信息
+VTP配置：
+	vtp domain domain_name
+
+
+
+
+STP:生成树协议
+
+
+二层物理环路会产生广播风暴
+		引起重复帧
+		MAC地址表不稳定
+为了避免广播风暴，同时保持有冗余，所以提出了生成树协议，就是为了解决物理上的环路，在逻辑上断开，同时防止广播风暴。当线路出现故障，断开端口被激活时，
+
+发现环路：
+	选择根网桥（Root Bridge）
+	选择根端口（Root Ports）
+	选择指定端口（Root z）
+
+
+选择网桥的依据：网桥id（BID=桥优先级+mac地址）交换机选择BID最小的交换自作为网络中的根网桥
+选择根端口依据：pid=端口优先级+端口号
+	在非根网桥上选择一个到根网桥最近的端口作为根端口
+	根据路径成本最低
+	直连的网桥bid最小	优先级+mac地址
+	直连的网桥端口id最小
+路径成本：根路径成本是网桥的路径上所有成本的开销，带宽越大，成本越低
+
+端口ID：缺省128，是16的整数倍，取值范围0~255，
+	端口优先级+端口编号
+	8位	   8位
+
+
+BPDU:桥协议数据单元
+交换机之间使用该协议生成STP信息
+使用组播发送该协议
+配置BPDU-用于生成书计算
+拓扑变更通告（TCN）
+
+生成树的端口状态
+	转发forwarding	发送和接收用户数据	
+	学习learning	构建网桥表		到转发过程需要15秒
+	侦听listening	构建“活动”拓扑	开机的状态，到学习状态是15秒
+	阻塞blocking	只接收BPDU 
+	禁用disable	
+从侦听到转发叫做转发延时，从阻断到侦听需要20秒
+
+
+
+单臂路由：
