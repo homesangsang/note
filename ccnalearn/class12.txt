@@ -1,0 +1,51 @@
+ACL:提供网络访问的基本安全手段
+	核心技术：包过滤
+#access-list 1	deny ？	//起编号，设置
+#access-list 1 permit any
+
+
+#access-group ? out
+标准的访问控制列表是基于源地址进行控制
+扩展的是基于源目ip以及源目端口
+
+NAT:网络地址转换
+将很多的私网转换成一个公网
+
+原理：改变ip包头，是目的地址，源地址或两个地址在包头中不被地址替换
+三种实现方式：
+	1.静态转换：大公司常用对外提供服务，从外部向内部转换
+	2.动态转换：
+	3.PAT,端口多路复用，多对一。基于端口65535个端口，灵活性很高
+		PAT缺点：延迟增大，配置和维护的复杂性，不支持某些应用（对于企业来说）
+边界地址：ip route 0.0.0.0 0.0.0.0 12.12.12.1 	#12.12.12.1是一个默认网关
+
+
+配置NAT:
+	1.写访问控制列表
+		access-list 1 permit 192.168.1.0 0.0.0.255
+	2.设置转换规则
+		ip nat inside source list 1 interface f0/1 overload
+//overload是端口复用，
+	3.定义内外接口
+		int fa0/0 
+		ip nat inside
+		int fa0/1
+		ip nat outside
+	show ip nat	# 查看nat转换
+
+
+
+ip dhcp poo pc
+dns-s ?
+
+
+telnet：远程登录
+line vty 0 4	//虚拟登陆进程
+login 
+paassword ,,..,..,.
+
+enable password .m.m.,.m.m,.	# 设置路由器的本机的密码
+
+
+transport input telnet	#设置允许telnet流量进入
+
