@@ -3,7 +3,7 @@
 1.创建与合并分支
 （1）创建dev分支，然后切换到devf分支：
 	$git checkout -b dev 
-	gitcheckout命令加上-b参数表示创建并切换，相当于一下两条命令
+	git checkout命令加上-b参数表示创建并切换，相当于一下两条命令
 		$git branch dev
 		$git checkout dev
 	然后用git branch查看当前分支，命令会列出所有分支，当前分支会加上×号
@@ -15,7 +15,7 @@
 	$git branch -d dev
 
 
-另注：因为创建，合并和删除分支非常快，所以git鼓励你使用废纸完成某个任务，合并后在删掉分支和直接在master分支上工作效果是一样的，但是更安全
+另注：因为创建，合并和删除分支非常快，所以git鼓励你使用废纸完成某个任务，合并后在删掉分支和直接在master分支上工作效果是一样的，但是更安全;另外，回忆在前面学习的内容，在工作区用git checkout,在暂存区用git reset,所以在这里将创建文件，创建分支，修改文件等都是在工作区的操作，所以用checkout
 
 使用到的命令
 git branch

@@ -14,7 +14,7 @@ ssh-keygen -t rsa -C "youremail@example.com"	//添加SSH Key
 2.把本地的仓库关联到github
 	$git remote add origin git@github.com:username/repositoryname.git
 3.把本地的仓库推送到github
-	$git push -u origin master	//第一次推送使用-u参数是为了把本地的master分支的内容推送到远程新的master上，同时把本地的master分支嗯哼远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令
+	$git push -u origin master	//第一次推送使用-u参数是为了把本地的master分支的内容推送到远程新的master上，同时把本地的master分支远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令
 4.以后推送
 	$git push origin master
 
